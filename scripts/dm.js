@@ -7,7 +7,9 @@ const fs = require('fs');
 const path = require('path');
 const { aba, JS, escreveEEnvia } = require('./cdp.js');
 const { cfg, DADOS, LOG, BLOQ, hora, min, hoje, hm } = require('./config.js');
-const LOTE = JSON.parse(fs.readFileSync(path.resolve(process.env.LOTE || path.join(DADOS, 'lote.json')), 'utf8'));
+const ARQ_LOTE = path.resolve(process.env.LOTE || path.join(DADOS, 'lote.json'));
+if (!fs.existsSync(ARQ_LOTE)) { console.error(`sem lote em ${ARQ_LOTE}: rode npm run lote ou passe LOTE=arquivo.json`); process.exit(1); }
+const LOTE = JSON.parse(fs.readFileSync(ARQ_LOTE, 'utf8'));
 const [de, ate] = [Number(process.argv[2] || 1), Number(process.argv[3] || LOTE.length)];
 const AGORA = process.argv.includes('--agora');
 const TETO = cfg.limites?.dms_por_dia ?? 10;
@@ -16,6 +18,14 @@ const INICIO = hm(cfg.horario?.inicio || '08:00'), FIM = hm(cfg.horario?.fim || 
 const [PA, PB] = (cfg.horario?.pausa || ['12:00', '13:30']).map(hm);
 const dorme = ms => new Promise(r => setTimeout(r, ms));
 const log = () => fs.existsSync(LOG) ? fs.readFileSync(LOG, 'utf8').trim().split('\n').filter(Boolean).map(l => JSON.parse(l)) : [];
+// um dm.js por vez: dois processos lendo o mesmo log furariam o teto do dia
+const TRAVA = path.join(DADOS, 'dm.lock');
+const vivo = pid => { try { process.kill(pid, 0); return true; } catch { return false; } };
+if (fs.existsSync(TRAVA) && vivo(Number(fs.readFileSync(TRAVA, 'utf8')))) { console.error('já tem um dm.js rodando (dados/dm.lock)'); process.exit(1); }
+fs.writeFileSync(TRAVA, String(process.pid));
+process.on('exit', () => { try { if (fs.readFileSync(TRAVA, 'utf8') === String(process.pid)) fs.unlinkSync(TRAVA); } catch {} });
+for (const s of ['SIGINT', 'SIGTERM']) process.on(s, () => process.exit(130));
+const naPausa = () => min() >= PA && min() < PB;
 const optout = new Set(fs.existsSync(path.join(DADOS, 'optout.txt')) ? fs.readFileSync(path.join(DADOS, 'optout.txt'), 'utf8').split(/\s+/).filter(Boolean) : []);
 
 async function manda(p) {
@@ -36,6 +46,7 @@ async function manda(p) {
 (async () => {
   const feitos = new Set(log().filter(x => x.r.startsWith('ok')).map(x => x.h));
   const fila = LOTE.slice(de - 1, ate).map((p, k) => ({ ...p, n: de + k })).filter(p => !feitos.has(p.h) && !optout.has(p.h));
+  let semBotao = 0;
   for (let i = 0; i < fila.length; i++) {
     const p = fila[i];
     if (log().filter(x => !x.tipo && x.r.startsWith('ok') && hoje(new Date(x.quando)) === hoje()).length >= TETO) { console.log(`${hora()} teto de ${TETO} DMs hoje, parei`); break; }
@@ -45,11 +56,16 @@ async function manda(p) {
       if (alvo >= PA && alvo < PB) { console.log(`${hora()} pausa até depois de ${cfg.horario?.pausa?.[1] || '13:30'}`); while (min() < PB) await dorme(30000); await dorme(Math.random() * 600000); }
       else { console.log(`${hora()} próximo (${p.n} @${p.h}) em ${Math.round(s / 60)} min`); await dorme(s * 1000); }
     }
-    if (min() < INICIO || min() >= FIM) { console.log(`${hora()} fora do horário (${cfg.horario?.inicio}–${cfg.horario?.fim}), parei`); break; }
+    if (min() < INICIO) { console.log(`${hora()} esperando o início (${cfg.horario?.inicio || '08:00'})`); while (min() < INICIO) await dorme(30000); }
+    if (naPausa()) { console.log(`${hora()} na pausa, esperando`); while (naPausa()) await dorme(30000); await dorme(Math.random() * 600000); }
+    if (min() >= FIM) { console.log(`${hora()} passou do fim do horário (${cfg.horario?.fim || '18:00'}), parei`); break; }
     const r = await manda(p).catch(e => 'erro: ' + e.message);
     fs.appendFileSync(LOG, JSON.stringify({ n: p.n, h: p.h, quando: new Date().toISOString(), r }) + '\n');
     console.log(`${hora()} ${String(p.n).padStart(2, '0')} @${p.h} → ${r}`);
     if (r === 'bloqueio') { console.log('PAROU: sinal de bloqueio do Instagram'); process.exit(2); }
+    // perfil sem botão de mensagem acontece (privado, restrito); dois seguidos é sinal de seletor quebrado
+    semBotao = r.startsWith('sem botão') ? semBotao + 1 : 0;
+    if (semBotao >= 2) { console.log('PAROU: dois perfis seguidos sem botão de mensagem, confira se o Instagram mudou a tela'); process.exit(3); }
     if (!r.startsWith('ok') && !/já tinha|sem botão/.test(r)) { console.log('PAROU: falha que precisa de olho'); process.exit(3); }
   }
   console.log(`${hora()} fim do lote`);
