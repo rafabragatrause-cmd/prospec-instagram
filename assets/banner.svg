@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="420" viewBox="0 0 1280 420" role="img" aria-label="prospec-instagram: prospecção por DM no Instagram, para qualquer nicho, operada por agente">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#feda75"/><stop offset=".35" stop-color="#fa7e1e"/><stop offset=".65" stop-color="#d62976"/><stop offset="1" stop-color="#4f5bd5"/>
+    </linearGradient>
+    <radialGradient id="orb" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#d62976" stop-opacity=".55"/><stop offset="1" stop-color="#d62976" stop-opacity="0"/></radialGradient>
+    <radialGradient id="orb2" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#4f5bd5" stop-opacity=".5"/><stop offset="1" stop-color="#4f5bd5" stop-opacity="0"/></radialGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#ffffff" stroke-opacity=".045"/></pattern>
+    <clipPath id="c"><rect width="1280" height="420" rx="22"/></clipPath>
+    <style>
+      .t{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
+      .m{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+      .o1{animation:f 9s ease-in-out infinite}.o2{animation:f 11s ease-in-out infinite reverse}
+      @keyframes f{0%,100%{transform:translate(0,0)}50%{transform:translate(-40px,24px)}}
+      .b{opacity:0;animation:in 8s infinite}
+      .b1{animation-delay:.2s}.b2{animation-delay:1.6s}.b3{animation-delay:3.4s}.b4{animation-delay:4.8s}
+      @keyframes in{0%{opacity:0;transform:translateY(10px)}6%,88%{opacity:1;transform:translateY(0)}96%,100%{opacity:0}}
+      .d{animation:dot 1s infinite}.d2{animation-delay:.15s}.d3{animation-delay:.3s}
+      @keyframes dot{0%,60%,100%{opacity:.25}30%{opacity:1}}
+    </style>
+  </defs>
+  <g clip-path="url(#c)">
+    <rect width="1280" height="420" fill="#0d0b12"/>
+    <rect width="1280" height="420" fill="url(#grid)"/>
+    <circle class="o1" cx="1010" cy="120" r="300" fill="url(#orb)"/>
+    <circle class="o2" cx="1180" cy="380" r="260" fill="url(#orb2)"/>
+    <rect x="0" y="0" width="1280" height="4" fill="url(#g)"/>
+
+    <text x="72" y="104" class="m" font-size="15" letter-spacing="3" fill="#f2a4c4">PROSPECÇÃO POR DM · QUALQUER NICHO</text>
+    <text x="70" y="186" class="t" font-size="76" font-weight="800" fill="#ffffff" letter-spacing="-2">prospec<tspan fill="url(#g)">-instagram</tspan></text>
+    <text x="72" y="240" class="t" font-size="24" fill="#c9c3d6">Busca o perfil, lê a bio, o agente escreve a DM</text>
+    <text x="72" y="272" class="t" font-size="24" fill="#c9c3d6">e o script manda no ritmo que a conta aguenta.</text>
+    <g class="m" font-size="14" fill="#ffffff">
+      <rect x="72" y="314" width="132" height="34" rx="17" fill="#ffffff" fill-opacity=".08" stroke="#ffffff" stroke-opacity=".14"/><text x="138" y="336" text-anchor="middle">Codex</text>
+      <rect x="214" y="314" width="160" height="34" rx="17" fill="#ffffff" fill-opacity=".08" stroke="#ffffff" stroke-opacity=".14"/><text x="294" y="336" text-anchor="middle">Claude Code</text>
+      <rect x="384" y="314" width="190" height="34" rx="17" fill="#ffffff" fill-opacity=".08" stroke="#ffffff" stroke-opacity=".14"/><text x="479" y="336" text-anchor="middle">Chrome DevTools</text>
+      <rect x="584" y="314" width="150" height="34" rx="17" fill="#ffffff" fill-opacity=".08" stroke="#ffffff" stroke-opacity=".14"/><text x="659" y="336" text-anchor="middle">0 dependências</text>
+    </g>
+
+    <!-- conversa -->
+    <g transform="translate(850 48)">
+      <rect width="340" height="324" rx="26" fill="#16131d" stroke="#ffffff" stroke-opacity=".12"/>
+      <circle cx="40" cy="42" r="17" fill="url(#g)"/>
+      <text x="68" y="40" class="t" font-size="15" font-weight="700" fill="#fff">clinica.exemplo</text>
+      <text x="68" y="58" class="t" font-size="12" fill="#8f879e">Instagram · Direct</text>
+      <line x1="0" y1="80" x2="340" y2="80" stroke="#ffffff" stroke-opacity=".08"/>
+      <g class="b b1"><rect x="96" y="98" width="226" height="74" rx="18" fill="url(#g)"/>
+        <text x="112" y="122" class="t" font-size="13" fill="#fff">Vi que vocês postam toda</text>
+        <text x="112" y="140" class="t" font-size="13" fill="#fff">semana sobre harmonização.</text>
+        <text x="112" y="158" class="t" font-size="13" fill="#fff">Cliente novo vem de onde?</text></g>
+      <g class="b b2"><rect x="18" y="186" width="214" height="42" rx="18" fill="#262130"/>
+        <text x="34" y="212" class="t" font-size="13" fill="#e9e4f2">Mais por indicação, e vocês?</text></g>
+      <g class="b b3"><rect x="120" y="242" width="202" height="42" rx="18" fill="url(#g)"/>
+        <text x="136" y="268" class="t" font-size="13" fill="#fff">Quinta às 10h ou 18h30?</text></g>
+      <g class="b b4"><rect x="18" y="268" width="0" height="0"/>
+        <rect x="18" y="292" width="66" height="22" rx="11" fill="#262130"/>
+        <circle class="d" cx="36" cy="303" r="3.5" fill="#cfc8db"/><circle class="d d2" cx="51" cy="303" r="3.5" fill="#cfc8db"/><circle class="d d3" cx="66" cy="303" r="3.5" fill="#cfc8db"/></g>
+    </g>
+  </g>
+</svg>

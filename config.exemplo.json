@@ -1,0 +1,11 @@
+{
+  "remetente": { "nome": "Seu nome", "empresa": "Sua empresa", "apresentacao": "agência de marketing da cidade" },
+  "oferta": "tráfego pago (Meta Ads e Google Ads) para negócio local",
+  "nichos": ["clinica de estetica", "odontologia", "pilates"],
+  "cidades": ["sua cidade"],
+  "cliente_chama": "cliente",
+  "pergunta_final": "Hoje o cliente novo chega mais por indicação ou vocês já rodam anúncio no Instagram e no Google?",
+  "limites": { "dms_por_dia": 10, "intervalo_min": [8, 15] },
+  "horario": { "fuso": "America/Sao_Paulo", "inicio": "08:00", "fim": "18:00", "pausa": ["12:00", "13:30"] },
+  "cdp_porta": 9333
+}

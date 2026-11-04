@@ -1,0 +1,16 @@
+[
+  {
+    "h": "clinica.exemplo",
+    "quem": "Clínica Exemplo",
+    "onde": "Cidade",
+    "por": "harmonização e skincare, posta toda semana",
+    "dm": "Oi, tudo bem? Sou da Sua empresa, agência de marketing da cidade. Vi que vocês postam toda semana sobre harmonização e skincare, com antes e depois bem cuidado. Hoje o cliente novo chega mais por indicação ou vocês já rodam anúncio no Instagram e no Google?"
+  },
+  {
+    "h": "studio.pilates.exemplo",
+    "quem": "Studio Exemplo",
+    "onde": "Cidade",
+    "por": "pilates para gestante, 3 unidades",
+    "dm": "Oi, tudo bem? Sou da Sua empresa, agência de marketing da cidade. Vi que o studio tem turma de pilates para gestante, coisa que pouca gente oferece aqui. Hoje o aluno novo chega mais por indicação ou vocês já rodam anúncio no Instagram e no Google?"
+  }
+]

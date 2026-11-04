@@ -1,0 +1,15 @@
+{
+  "name": "prospec-instagram",
+  "version": "1.0.0",
+  "description": "Prospecção por DM no Instagram, para qualquer nicho, operada por agente (Codex ou Claude Code) via Chrome DevTools Protocol.",
+  "private": true,
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "chrome": "bash scripts/abrir-chrome.sh",
+    "busca": "node scripts/busca.js",
+    "perfis": "node scripts/perfis.js",
+    "lote": "bash scripts/escreve-lote.sh",
+    "dm": "node scripts/dm.js",
+    "inbox": "node scripts/inbox.js"
+  }
+}

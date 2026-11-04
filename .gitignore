@@ -1,0 +1,5 @@
+config.json
+dados/
+*.log
+.DS_Store
+node_modules/
